@@ -1,0 +1,22 @@
+You are required to edit the following classes:
+at comment /*YOUR CODE HERE*/
+1. package list:
+* MyArrayList
+* DLinkedList
+* SLinkedList
+
+2. package stacknqueue:
+* Stack
+* Queue
+
+3. package heap:
+* Heap
+
+4. package has:
+* XHashMap
+
+Guidelines:
+1. Should read other classes, especially pos-fixed with "Demo" or "App"
+2. Should run test for ensure to pass all the tests:
+* Right-Click on "AssignmentTestRunner" and select menu "Run file"
+* other Right-click on other class pos-fixed with "Test" and select menu "Test file"
