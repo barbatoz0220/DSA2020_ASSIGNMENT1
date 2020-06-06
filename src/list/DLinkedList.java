@@ -402,8 +402,7 @@ public class DLinkedList<E> implements List<E>{
             Node<E> removedNode;
             if(moveType == MoveType.NEXT){
                 removedNode = curNode.prev;
-            }
-            else{
+            } else {
                 removedNode = curNode;
                 curNode = curNode.next;
             }
