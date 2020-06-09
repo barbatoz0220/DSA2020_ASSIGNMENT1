@@ -42,29 +42,39 @@ public class BST<T> implements IBinarySearchTree<T>, ITreeWalker<T> {
     ///
     @Override
     public void add(T item) {
-        Node<T> root = add(this.root, item);
+        this.root = add(root, item);
         this.size++;
     }
 
     private Node<T> remove(Node<T> root, Object key) {
-        if(root == null) return null;
-        if(key.hashCode() < key(root.item)) {
+        if (root == null) return null;
+        if (key.hashCode() < key(root.item)) {
             root.left = remove(root.left, key);
             return root;
-        } else if(key.hashCode() > key(root.item)) {
+        } else if (key.hashCode() > key(root.item)) {
             root.right = remove(root.right, key);
             return root;
-        }
-        else{
-            // If the root has both left and right subtrees
-            // Find the largest value of the left subtree or the smallest value of the right subtree
-            Node<T> largest = root.left;
-            while(largest.right != null)
-                largest = largest.right;
-            root.item = largest.item;
-            root.left = remove(root.left, largest.item);
-            return root;
+        } else {
+            if (root.left == null) {
+                this.size--;
+                root = root.right;
+            } else if (root.right == null) {
+                this.size--;
+                root = root.left;
+            } else {
+                // If the root has both left and right subtrees
+                // Find the largest value of the left subtree or the smallest value of the right subtree
+                Node<T> largest = root.left;
+                while (largest.right != null) {
+                    largest = largest.right;
+                }
+                root.item = largest.item;
+                root.left = remove(root.left, largest.item);
 
+            }
+        }
+        return root;
+    }
             /** Node<T> smallest = root.right;
              while(smallest.left != null)
              smallest = smallest.left;
@@ -72,12 +82,9 @@ public class BST<T> implements IBinarySearchTree<T>, ITreeWalker<T> {
              root.right = remove(root.right, smallest.item);
              return root;
              */
-        }
-    }
 
     @Override
     public void remove(Object key) {
-        this.size --;
         remove(root, key);
     }
 
@@ -123,9 +130,10 @@ public class BST<T> implements IBinarySearchTree<T>, ITreeWalker<T> {
 
     private void descendingList(Node<T> root, List<T> list) {
         if(root == null) return;
-        descendingList(root.left, list);
-        list.add(root.item);
         descendingList(root.right, list);
+        list.add(root.item);
+        descendingList(root.left, list);
+
     }
     @Override
     public List<T> descendingList() {
@@ -157,8 +165,8 @@ public class BST<T> implements IBinarySearchTree<T>, ITreeWalker<T> {
         queue.push(this.root);
         while(!queue.empty()) {
             Node<T> node = queue.pop();
-            if (node.right != null) queue.push(node.right);
             if (node.left != null) queue.push(node.left);
+            if (node.right != null) queue.push(node.right);
             list.add(node.item);
         }
         return list;
@@ -194,18 +202,18 @@ public class BST<T> implements IBinarySearchTree<T>, ITreeWalker<T> {
     @Override
     public List<T> lrn() {
         List<T> lrnList = new DLinkedList<>();
-        nlr(this.root, lrnList);
+        lrn(this.root, lrnList);
         return lrnList;
     }
 
     @Override
     public List<T> lnr() {
         List<T> lnrList = new DLinkedList<>();
-        nlr(this.root, lnrList);
+        lnr(this.root, lnrList);
         return lnrList;
     }
     //
-    public class Node<T>{
+    public static class Node<T>{
         T item;
         Node<T> left, right;
         public Node(T data, Node<T> left, Node<T> right){
