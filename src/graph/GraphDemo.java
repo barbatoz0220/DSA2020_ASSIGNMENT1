@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package graph;
 
 import java.util.Iterator;
@@ -13,13 +18,27 @@ public class GraphDemo {
         //mstDemo();
         //dijkstraDemo();
         TopoSortDemo();
+        //ugraphDemo();
+    }
+    public static void ugraphDemo(){
+        UGraphModel<String> graph = new UGraphModel<>();
+        graph.add("HCM");
+        graph.add("LongAn");
+        graph.add("BinhDuong");
+        graph.add("DongNai");
+        graph.add("BinhThuan");
+        graph.connect("HCM", "LongAn");
+        graph.connect("HCM", "BinhDuong");
+        graph.connect("HCM", "DongNai");
+        graph.connect("DongNai", "BinhThuan");
+        graph.println();
     }
     public static void TopoSortDemo(){
         DGraphModel<Character> model = new DGraphModel<>();
         for(int idx=0; idx<10; idx++){
-             model.add((char)('0' + idx));
+            model.add((char)('0' + idx));
         }
-        
+
         model.connect('0', '1');
         model.connect('0', '5');
         model.connect('1', '7');
@@ -35,9 +54,9 @@ public class GraphDemo {
         model.connect('8', '7');
         model.connect('9', '4');
         model.println();
-        
+
         TopoSorter<Character> sorter = new TopoSorter<>(model);
-        List<Character> topo = sorter.sort(TopoSorter.DFS);
+        List<Character> topo = sorter.sort(TopoSorter.BFS);
         System.out.println(topo);
     }
     public static void mstDemo(){
@@ -63,12 +82,12 @@ public class GraphDemo {
         model.connect('E', 'F', 5);
 
         model.println();
-        
+
         model.disconnect('C', 'A');
         model.disconnect('C', 'B');
         model.disconnect('C', 'D');
         model.disconnect('C', 'E');
-        
+
         model.println();
 
         UGraphAlgorithm<Character> mst = new UGraphAlgorithm<>(model);

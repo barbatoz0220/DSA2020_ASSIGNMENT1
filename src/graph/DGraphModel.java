@@ -67,7 +67,7 @@ public class DGraphModel<T> extends AbstractGraph<T>{
 class Stack<T>{
     private List<T> list;
     public Stack(){
-        this.list = new DLinkedList<>();
+        this.list = new LinkedList<>();
     }
     public void push(T item){
         this.list.add(0, item);
@@ -94,11 +94,10 @@ class Stack<T>{
         return this.list.size();
     }
 }
-
 class Queue<T>{
     private List<T> list;
     public Queue(){
-        this.list = new DLinkedList<>();
+        this.list = new LinkedList<>();
     }
     public void push(T item){
         this.list.add(item);
@@ -142,14 +141,26 @@ class TopoSorter<T>{
         List<T> topoOrder = new LinkedList<>();
         HashMap<T, Integer> indegreeMap = vertex2inDegree();
         List<T> list = listOfZeroInDegrees();
-        
+
         Queue<T> queue = new Queue<>();
         for(T item: list) queue.push(item);
-        
-        /**
-		 * Your Code Here
-		 */
 
+        /** Your code here*/
+        while (!queue.isEmpty()) {
+            T curVertex = queue.peek();
+            topoOrder.add(curVertex);
+            VertexNode<T> curVertexNode = this.graph.getVertexNode(curVertex);
+            Iterator<Edge<T>> adListIterator = curVertexNode.adList.listIterator();
+            queue.pop();
+
+            while(adListIterator.hasNext()) {
+                VertexNode<T> neighborNode = adListIterator.next().to;
+                T vertexNeighbor = neighborNode.vertex;
+                indegreeMap.put(vertexNeighbor, indegreeMap.get(vertexNeighbor) - 1);
+                if (indegreeMap.get(vertexNeighbor) == 0)
+                    queue.push(vertexNeighbor);
+            }
+        }
         return topoOrder;
     }
     public List<T> dfsSort(){
@@ -179,10 +190,10 @@ class TopoSorter<T>{
                     outdegreeMap.put(vertex, outDegree - 1);
                 }
             }
-        } //while: stack not empty
+        }//while: stack not empty
         return topoOrder;
     }
-    
+
     private HashMap<T, Integer> vertex2inDegree(){
         HashMap<T, Integer> map = new HashMap<>();
         Iterator<T> vertexIt = this.graph.iterator();
@@ -279,7 +290,7 @@ class DGraphAlgorithm<T> implements IFinder<T>{
         }
         return list;
     }
-    
+
     //
     class Node{
         Node parent;
@@ -316,3 +327,4 @@ class DGraphAlgorithm<T> implements IFinder<T>{
 
     }
 }
+

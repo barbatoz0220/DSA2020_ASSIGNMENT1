@@ -162,7 +162,7 @@ class VertexNode<T> {
 	public VertexNode(T data) {
 		this.vertex = data;
 		this.inDegree = this.outDegree = 0;
-		// adjacency list, this list has a set of edges to other vertices that this one connects to
+		// adjacency list, this list has a set of edges to other vertices that this one connects
 		this.adList = new DLinkedList<>();
 	}
 
@@ -171,20 +171,19 @@ class VertexNode<T> {
 	}
 
 	public void connect(VertexNode<T> to, float weight) {
-		/** Your Code Here */
 		Edge<T> edge = getEdge(to);
 		if(edge == null){
 			edge = new Edge(this, to, weight);
 			this.adList.add(edge);
 			edge.from.outDegree += 1;
 			edge.to.inDegree += 1;
+		} else {
+			edge.weight = weight;
 		}
-		else edge.weight = weight;
 	}
 
 	// This function returns all the edges pointing outwards values that the adjacency list contains
 	public List<T> getOutwardEdges() {
-		/** Your Code Here */
 		List<T> vertexList = new DLinkedList<>();
 		Iterator<Edge<T>> iterator = this.adList.iterator();
 		while (iterator.hasNext()) {
@@ -199,24 +198,13 @@ class VertexNode<T> {
 		Iterator<Edge<T>> adListIterator = this.adList.iterator();
 		while(adListIterator.hasNext()){
 			Edge<T> curEdge = adListIterator.next();
-			if(curEdge.equals(new Edge<>(this, to))) return curEdge;
+			if(curEdge.equals(new Edge<>(this, to)))
+				return curEdge;
 		}
 		return null;
 	}
 
-	public void disconnectAll(List<VertexNode<T>> nodeList) {
-		/** Your Code Here*/
-		// This function uses the removeTo function below
-		for (VertexNode<T> vertexNode : nodeList) {
-			for (Edge<T> edge : vertexNode.adList) {
-				removeTo(edge.to);
-			}
-		}
-	}
-
-
 	public void removeTo(VertexNode<T> to) {
-		/** Your Code Here*/
 		ListIterator<Edge<T>> adListIterator = adList.listIterator();
 		while(adListIterator.hasNext()) {
 			Edge<T> curEdge = adListIterator.next();

@@ -25,27 +25,27 @@ import org.junit.Rule;
  * @author LTSACH
  */
 public class BSTTest {
-    
+
     public BSTTest() {
     }
-    
+
     @Rule
-    public Timeout globalTimeout = new Timeout(2000); 
-    
+    public Timeout globalTimeout = new Timeout(2000);
+
     @BeforeClass
     public static void setUpClass() {
         System.out.println("Performing the testing for class: DGraphMode.TopoSort");
         System.out.println(new String(new char[80]).replace('\0', '='));
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -54,7 +54,7 @@ public class BSTTest {
     public void size() {
         System.out.println("testing ... size()");
         IBinarySearchTree<Integer> bst = new BST<>();
-        
+
         int values[] = {50, 20, 70, 10, 25, 60, 80};
         for(int v: values) bst.add(v);
         assertEquals(7, bst.size());
@@ -63,7 +63,7 @@ public class BSTTest {
     public void remove() {
         System.out.println("testing ... remove()");
         IBinarySearchTree<Integer> bst = new BST<>();
-        
+
         int values[] = {50, 20, 70, 10, 25, 60, 80};
         for(int v: values) bst.add(v);
         assertEquals(7, bst.size());
@@ -77,7 +77,7 @@ public class BSTTest {
     public void search() {
         System.out.println("testing ... search()");
         IBinarySearchTree<Integer> bst = new BST<>();
-        
+
         int values[] = {50, 20, 70, 10, 25, 60, 80};
         for(int v: values) bst.add(v);
         assertEquals(7, bst.size());
@@ -92,7 +92,7 @@ public class BSTTest {
     public void ascendingList() {
         System.out.println("testing ... ascendingList()");
         IBinarySearchTree<Integer> bst = new BST<>();
-        
+
         int values[] = {50, 20, 70, 10, 25, 60, 80};
         for(int v: values) bst.add(v);
         assertEquals(7, bst.size());
@@ -108,7 +108,7 @@ public class BSTTest {
     public void descendingList() {
         System.out.println("testing ... descendingList()");
         IBinarySearchTree<Integer> bst = new BST<>();
-        
+
         int values[] = {50, 20, 70, 10, 25, 60, 80};
         for(int v: values) bst.add(v);
         assertEquals(7, bst.size());
@@ -124,7 +124,7 @@ public class BSTTest {
     public void nlr() {
         System.out.println("testing ... nlr()");
         BST<Integer> bst = new BST<>();
-        
+
         int values[] = {50, 20, 70, 10, 25, 60, 80};
         for(int v: values) bst.add(v);
         assertEquals(7, bst.size());
@@ -140,7 +140,7 @@ public class BSTTest {
     public void lnr() {
         System.out.println("testing ... lnr()");
         BST<Integer> bst = new BST<>();
-        
+
         int values[] = {50, 20, 70, 10, 25, 60, 80};
         for(int v: values) bst.add(v);
         assertEquals(7, bst.size());
@@ -157,7 +157,7 @@ public class BSTTest {
     public void lrn() {
         System.out.println("testing ... lrn()");
         BST<Integer> bst = new BST<>();
-        
+
         int values[] = {50, 20, 70, 10, 25, 60, 80};
         for(int v: values) bst.add(v);
         assertEquals(7, bst.size());
@@ -174,7 +174,7 @@ public class BSTTest {
     public void bfs() {
         System.out.println("testing ... lrn()");
         BST<Integer> bst = new BST<>();
-        
+
         int values[] = {50, 20, 70, 10, 25, 60, 80};
         for(int v: values) bst.add(v);
         assertEquals(7, bst.size());
@@ -187,5 +187,5 @@ public class BSTTest {
             assertEquals(true, exp==real);
         }
     }
-    
+
 }

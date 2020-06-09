@@ -15,9 +15,7 @@ public class UGraphModel<T> extends AbstractGraph<T> {
     public void connect(T from, T to) throws VertexNotFoundException{
         VertexNode<T> nodeF = getVertexNode(from);
         VertexNode<T> nodeT = getVertexNode(to);
-        if(nodeF == null) throw new VertexNotFoundException(nodeF);
-        if(nodeT == null) throw new VertexNotFoundException(nodeT);
-        
+
         nodeF.connect(nodeT);
         nodeT.connect(nodeF);
     }
@@ -25,9 +23,7 @@ public class UGraphModel<T> extends AbstractGraph<T> {
     public void connect(T from, T to, float weight) throws VertexNotFoundException{
         VertexNode<T> nodeF = getVertexNode(from);
         VertexNode<T> nodeT = getVertexNode(to);
-        if(nodeF == null) throw new VertexNotFoundException(from);
-        if(nodeT == null) throw new VertexNotFoundException(to);
-        
+
         nodeF.connect(nodeT, weight);
         nodeT.connect(nodeF, weight);
     }
