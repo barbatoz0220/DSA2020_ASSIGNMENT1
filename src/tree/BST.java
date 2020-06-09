@@ -123,7 +123,7 @@ public class BST<T> implements IBinarySearchTree<T>, ITreeWalker<T> {
     }
     @Override
     public List<T> ascendingList() {
-        List<T> list = new LinkedList<>();
+        List<T> list = new DLinkedList<>();
         ascendingList(root, list);
         return list;
     }
@@ -137,7 +137,7 @@ public class BST<T> implements IBinarySearchTree<T>, ITreeWalker<T> {
     }
     @Override
     public List<T> descendingList() {
-        List<T> list = new LinkedList<>();
+        List<T> list = new DLinkedList<>();
         descendingList(root, list);
         return list;
     }
@@ -160,7 +160,7 @@ public class BST<T> implements IBinarySearchTree<T>, ITreeWalker<T> {
 
     @Override
     public List<T> bfs() {
-        List<T> list = new LinkedList<>();
+        List<T> list = new DLinkedList<>();
         Queue<Node<T>> queue = new Queue<>();
         queue.push(this.root);
         while(!queue.empty()) {

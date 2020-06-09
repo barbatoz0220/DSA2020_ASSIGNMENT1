@@ -77,7 +77,7 @@ public abstract class AbstractGraph<T> implements IGraph<T> {
 
 	@Override
 	public List getInwardEdges(T to) throws VertexNotFoundException {
-		List<T> list = new LinkedList<>();
+		List<T> list = new DLinkedList<>();
 
 		Iterator<VertexNode<T>> nodeIt = nodeList.iterator();
 		while (nodeIt.hasNext()) {

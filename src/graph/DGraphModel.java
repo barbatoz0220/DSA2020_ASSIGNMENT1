@@ -204,6 +204,7 @@ class TopoSorter<T>{
         }
         return map;
     }
+
     private HashMap<T, Integer> vertex2outDegree(){
         HashMap<T, Integer> map = new HashMap<>();
         Iterator<T> vertexIt = this.graph.iterator();
@@ -214,8 +215,9 @@ class TopoSorter<T>{
         }
         return map;
     }
+
     private List<T> listOfZeroInDegrees(){
-        List<T> list = new LinkedList<>();
+        List<T> list = new DLinkedList<>();
         Iterator<T> vertexIt = this.graph.iterator();
         while(vertexIt.hasNext()){
             T vertex = vertexIt.next();
@@ -233,7 +235,7 @@ class DGraphAlgorithm<T> implements IFinder<T>{
     }
     @Override
     public List<Path> dijkstra(IGraph<T> graph, T start) {
-        List<Node> explored = new LinkedList<>();
+        List<Node> explored = new DLinkedList<>();
         PriorityQueue<Node> frontier = new PriorityQueue<>(100, new NodeComparator());
         frontier.add(new Node(null, start, 0));
         while(!frontier.isEmpty()){
@@ -268,7 +270,7 @@ class DGraphAlgorithm<T> implements IFinder<T>{
         return constructPath(explored);
     }
     private List<Path> constructPath(List<Node> explored){
-        List<Path> list = new LinkedList<>();
+        List<Path> list = new DLinkedList<>();
 
         Iterator<Node> it = explored.iterator();
         while(it.hasNext()){
